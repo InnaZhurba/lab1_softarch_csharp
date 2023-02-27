@@ -1,0 +1,8 @@
+POST http://localhost:5152/post
+Content-Type: application/json
+
+"msg56578 from Inna"
+
+###
+
+GET http://localhost:5152/get
