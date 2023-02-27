@@ -1,9 +1,0 @@
-//post http request that recieve string and return string
-POST http://localhost:5248/post 
-Content-Type: application/json
-
-"hello world2 from Inna Zhurba"
-
-###
-
-GET http://localhost:5248/get
