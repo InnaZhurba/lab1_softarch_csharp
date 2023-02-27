@@ -12,4 +12,6 @@ Implemented 3 microservices: <br>
 
 ### Visualisation
 ![alt text](visualization.gif)
+
+<br>If animation doesn`t work - you can check file visualization.mov<br>
 ![alt text](visualization.mov)
