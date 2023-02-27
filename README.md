@@ -11,5 +11,5 @@ Implemented 3 microservices: <br>
 - messages: for now it has static message on GET request. 
 
 ### Visualisation
-
+![alt text](visualization.gif)
 ![alt text](visualization.mov)
