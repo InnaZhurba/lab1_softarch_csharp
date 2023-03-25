@@ -17,9 +17,15 @@ public class FacadeController
     private WebClient messagesService = new WebClient();
     
     // URIs of logging and messages services
-    string loggingURI = "http://localhost:5248/";
+    //string loggingURI = "http://localhost:5248/";
     string messagesURI = "http://localhost:5133/";
     
+    // list of loggingURLs with URLS : "http://localhost:5248/", "http://localhost:5247/", http://localhost:5249/"
+    static string[] loggingURLs = new string[] {"http://localhost:5248/", "http://localhost:5247/", "http://localhost:5249/"};
+    
+    //choose random loggingURL from loggingURLs
+    string loggingURI = loggingURLs[new Random().Next(0, loggingURLs.Length)];
+
     // Logger
     //private static readonly ILogger<FacadeController> _logger;
     private readonly ILogger _logger;

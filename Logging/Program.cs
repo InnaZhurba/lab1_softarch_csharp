@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Hazelcast;
 using Logging.Controllers;
 using Logging.Domain;
@@ -5,12 +6,14 @@ using Logging.Services;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
+Process.Start("/Users/innazhurba/Documents/06semesterUCU/software_architecture/lab1/lab1_softarch_coreweb/Logging/hazelcast-5.2.2/bin/hz-start");
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 var options = new HazelcastOptions();
 options.ClusterName = "dev";
 options.ClientName = "net-client";
-options.Networking.Addresses.Add("localhost:5701");
 
 builder.Services.AddSingleton<IHazelcastService<int, string>, HazelcastService<int, string>>
     ((service => new HazelcastService<int, string>(options, "logging_messages")));
@@ -20,7 +23,7 @@ var app = builder.Build();
 
 LoggingController loggingController = new LoggingController(builder.Services.BuildServiceProvider().GetService<ILoggerFactory>());
 TestController testController = new TestController(builder.Services.BuildServiceProvider().GetService<ILoggerFactory>(),
-    builder.Services.BuildServiceProvider().GetService<IHazelcastService<int,string>>());
+    builder.Services.BuildServiceProvider().GetService<IHazelcastService<int,string>>()); 
 
 // post request to save message to logging service from http request body
 app.MapPost("/post",  async (HttpRequest request) =>
