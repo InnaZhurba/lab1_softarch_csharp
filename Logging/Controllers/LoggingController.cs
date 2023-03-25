@@ -2,12 +2,15 @@ using System.Collections.Specialized;
 using Logging.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Logging.Services;
 
 namespace Logging.Controllers;
 
+[ApiController]
 public class LoggingController
 {
-    
+   
+
     // logger 
     //private static readonly ILogger<LoggingController> _logger;
     private readonly ILogger _logger;

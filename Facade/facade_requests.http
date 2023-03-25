@@ -6,3 +6,12 @@ Content-Type: application/json
 ###
 
 GET http://localhost:5152/get
+
+###
+POST http://localhost:5248/post
+Content-Type: application/json
+
+"msg9"
+
+###
+GET http://localhost:5248/get

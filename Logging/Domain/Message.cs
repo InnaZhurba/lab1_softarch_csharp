@@ -3,8 +3,8 @@ namespace Logging.Domain;
 public class Message
 {
     // has two variables UUID and message, constructor that takes message and generates UUID with getters and setters
-    public int UUID { get; set; }
-    public string message { get; set; }
+    private int UUID { get; set; }
+    private string message { get; set; }
     
     public Message(string message)
     {
@@ -26,6 +26,10 @@ public class Message
     public string GetMessages()
     {
         return message;
+    }
+    public int GetUUID()
+    {
+        return UUID;
     }
     public override string ToString()
     {
