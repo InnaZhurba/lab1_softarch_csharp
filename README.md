@@ -10,3 +10,4 @@ Implemented 3 microservices: <br>
 - logger: save messages from the clients that ask for it using facade and send saved messages if it is requested; <br>
 - messages: for now it has static message on GET request.  <br>
 See additional information in Zhurba_lab3.pdf <br>
+Video: https://drive.google.com/file/d/1kiw9lfWdLYnqA7a865v1Z9B62E04CE5m/view?usp=sharing
