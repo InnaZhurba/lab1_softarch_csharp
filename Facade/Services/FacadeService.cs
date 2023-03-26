@@ -17,12 +17,9 @@ public class FacadeService
     private string messagesURI = "http://localhost:5133/";
     
     // list of loggingURLs with URLS : "http://localhost:5248/", "http://localhost:5247/", http://localhost:5249/"
-    private static string[] loggingURLs = new string[] {"http://localhost:5248/", "http://localhost:5247/", "http://localhost:5249/"};
-    
-    //choose random loggingURL from loggingURLs
-    private string loggingURI = loggingURLs[new Random().Next(0, loggingURLs.Length)];
+    private static string[] loggingURLs = {"http://localhost:5248/", "http://localhost:5247/", "http://localhost:5249/"};
 
-    
+
     public FacadeService(ILoggerFactory loggerFactory)
     {
         _logger = loggerFactory.CreateLogger<FacadeService>();
@@ -31,6 +28,9 @@ public class FacadeService
     // GET request
     public string GetMessages()
     {
+        //choose random loggingURL from loggingURLs
+        string loggingURI = loggingURLs[new Random().Next(0, loggingURLs.Length)];
+        
         //message: get messages from MessagesController
         _logger.LogInformation("Get messages from MessagesController");
         var messages =  messagesService.DownloadString(messagesURI+"get");
@@ -56,6 +56,9 @@ public class FacadeService
     // POST request
     public void AddMessage(string message)
     {
+        //choose random loggingURL from loggingURLs
+        string loggingURI = loggingURLs[new Random().Next(0, loggingURLs.Length)];
+        
         //message: added to LoggingController
         _logger.LogInformation($"Message added to LoggingController: {message}");
 
