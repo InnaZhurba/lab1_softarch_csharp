@@ -1,6 +1,7 @@
 using System.Net;
 using System.Text;
 using Newtonsoft.Json;
+using Consul;
 
 namespace Facade.Services;
 
@@ -17,15 +18,40 @@ public class FacadeService
     //private string messagesURI = "http://localhost:5133/";
     
     // list of loggingURLs with URLS : "http://localhost:5248/", "http://localhost:5247/", http://localhost:5249/"
-    private static string[] loggingURLs = {"http://localhost:5248/", "http://localhost:5247/", "http://localhost:5249/"};
+    private static string[] loggingURLs = Array.Empty<string>();// = {"http://localhost:5248/", "http://localhost:5247/", "http://localhost:5249/"};
     
     // list of messagesURLs with URLS : "http://localhost:5133/", "http://localhost:5132/", http://localhost:5134/"
-    private static string[] messagesURLs = {"http://localhost:5133/", "http://localhost:5134/"};
+    private static string[] messagesURLs= Array.Empty<string>();// = {"http://localhost:5133/", "http://localhost:5134/"};
 
 
     public FacadeService(ILoggerFactory loggerFactory)
     {
+        GetAdressesPorts();
         _logger = loggerFactory.CreateLogger<FacadeService>();
+    }
+
+    public async void GetAdressesPorts()
+    {
+        var consulClient = new ConsulClient();
+
+        // get all services from consul
+        var Services = await consulClient.Agent.Services();
+        loggingURLs = Services.Response.Values
+            .Where(x => x.Service.Equals("LoggingService"))
+            .Select(x => "http://" +x.Address + ":" + x.Port + "/")
+            .ToArray();
+        
+        messagesURLs = Services.Response.Values
+            .Where(x => x.Service.Equals("MessageService"))
+            .Select(x => "http://" +x.Address + ":" + x.Port + "/")
+            .ToArray();
+        
+        // show in logger loggingURLs and messagesURLs
+        for( int i = 0; i < loggingURLs.Length; i++)
+            _logger.LogInformation("loggingURLs: " + loggingURLs[i]);
+        
+        for( int i = 0; i < messagesURLs.Length; i++)
+            _logger.LogInformation("messagesURLs: " + messagesURLs[i]);
     }
     
     // GET request

@@ -1,6 +1,29 @@
 using System.Net;
 using Facade.Controllers;
 using Facade.Services;
+using Consul;
+
+// ------------------------------------------
+// Реєстрація ConsulClient
+// Отримання конфігурації сервісу (наприклад, адреси, порту, тощо)
+string serviceID = "facade-service";
+string serviceName = "FacadeService";
+string serviceAddress = "localhost";
+int servicePort = 5152;
+        
+string adress_port = "http://" + serviceAddress + ":" + servicePort;
+
+var registration = new AgentServiceRegistration
+{
+    ID = serviceID,
+    Name = serviceName,
+    Address = serviceAddress,
+    Port = servicePort
+};
+
+var consulClient = new ConsulClient();
+var result = consulClient.Agent.ServiceRegister(registration).Result;
+
 
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();

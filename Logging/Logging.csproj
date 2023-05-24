@@ -7,9 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Consul" Version="1.6.10.9" />
+      <PackageReference Include="Consul.Net.API" Version="0.0.1" />
       <PackageReference Include="Hazelcast.Net" Version="5.2.0" />
       <PackageReference Include="Hazelcast.Net.DependencyInjection" Version="5.2.0" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3-beta1" />
+      <PackageReference Include="System.Text.Json" Version="8.0.0-preview.4.23259.5" />
     </ItemGroup>
 
 </Project>
